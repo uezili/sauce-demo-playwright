@@ -1,0 +1,20 @@
+export class LoginPage {
+    constructor(page) {
+        this.page = page;
+        this.passwordInput = this.page.locator('input[data-test="password"]');
+        this.usernameInput = this.page.locator('input[data-test="username"]');
+        this.loginBnt = this.page.locator('#login-button');
+        this.errorMessage = this.page.locator('.error-message');
+
+    }
+
+    async gotoLoginPage() {
+        await this.page.goto('/');
+    }
+
+    async login(username, password) {
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
+        await this.loginBnt.click();
+    }
+}
