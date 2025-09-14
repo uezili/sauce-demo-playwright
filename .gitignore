@@ -7,3 +7,5 @@ node_modules/
 /playwright/.cache/
 .idea
 /tests-examples
+screenshots
+package-lock.json
