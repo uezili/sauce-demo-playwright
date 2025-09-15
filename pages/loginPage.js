@@ -4,8 +4,8 @@ export class LoginPage {
         this.passwordInput = this.page.locator('input[data-test="password"]');
         this.usernameInput = this.page.locator('input[data-test="username"]');
         this.loginBnt = this.page.locator('#login-button');
-        this.errorMessage = this.page.locator('.error-message');
-
+        this.errorMessage = this.page.locator('h3[data-test="error"]');
+        this.swagLabsLogo = this.page.locator('.app_logo');
     }
 
     async gotoLoginPage() {
@@ -16,5 +16,9 @@ export class LoginPage {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginBnt.click();
+    }
+
+    async getErrorMessage() {
+        await this.errorMessage.innerText();
     }
 }

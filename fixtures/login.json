@@ -1,9 +1,9 @@
  {
   "users": {
-    "standard_user": "standard_user",
-    "locked_out_user": "locked_out_user",
-    "problem_user": "problem_user"
+    "STANDARD_USER": "standard_user",
+    "LOCKED_OUT_USER": "locked_out_user",
+    "PROBLEM_USER": "problem_user"
   },
-  "password": "secret_sauce"
+  "PASSWORD": "secret_sauce"
 
 }
