@@ -6,14 +6,15 @@ import productFixtures from "../fixtures/products.json";
 import {InventoryPage} from "../pages/inventoryPage";
 
 test.describe('Cart', () => {
+    let loginPage
     let cartPage
     let inventoryPage
 
     test.beforeEach( async ({ page }) => {
         cartPage = new CartPage(page);
         inventoryPage = new InventoryPage(page);
+        loginPage = new LoginPage(page);
 
-        const loginPage = new LoginPage(page);
         await loginPage.gotoLoginPage();
         await loginPage.login(userFixtures.users.STANDARD_USER, userFixtures.PASSWORD);
     })
@@ -31,7 +32,6 @@ test.describe('Cart', () => {
     });
 
     test('Should allow user to continue shopping', async ({ page }) => {
-
         await cartPage.gotoCartPage();
         await cartPage.clickContinueShopping();
         await expect(page).toHaveURL("/inventory.html");
@@ -41,19 +41,26 @@ test.describe('Cart', () => {
         await inventoryPage.addProductToCart(
             [productFixtures.products.BOLT_TSHIRT]
         );
+
         await cartPage.gotoCartPage();
         await cartPage.clickCheckout();
         await expect(page).toHaveURL("/checkout-step-one.html");
     });
 
     test('Should keep products in cart after navigation', async ({ page }) => {
-        await inventoryPage.addProductToCart(
-            [productFixtures.products.BOLT_TSHIRT]
-        );
-        await cartPage.open();
+        await inventoryPage.addProductToCart([
+            productFixtures.products.BOLT_TSHIRT,
+            productFixtures.products.BIKE_LIGHT,
+            productFixtures.products.BACKPACK,
+            productFixtures.products.ONESIE
+            ]);
+
+        await cartPage.gotoCartPage();
+        const countItemsCart = await cartPage.getCartItemsCount();
         await cartPage.clickContinueShopping();
-        await cartPage.open();
-        expect(await cartPage.getProductsListItemsName()).toBeGreaterThan(0);
+        await cartPage.gotoCartPage();
+
+        expect(await cartPage.getCartItemsCount()).toBe(countItemsCart);
     });
 
 
@@ -61,8 +68,10 @@ test.describe('Cart', () => {
         await inventoryPage.addProductToCart([
             productFixtures.products.BACKPACK,
         ]);
+
         await cartPage.gotoCartPage();
         await cartPage.removeProductFromCart();
+
         expect(await cartPage.getCartItemsCount()).toBe(0);
     });
 })
