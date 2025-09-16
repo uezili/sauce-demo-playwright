@@ -1,6 +1,12 @@
 export class CartPage {
     constructor(page) {
         this.page = page;
+        this.cartItems = page.locator('.cart_item');
+        this.cartQty = page.locator('div[data-test="item-quantity"]');
+        this.continueShoppingBtn = page.locator('button[data-test="continue-shopping"]');
+        this.checkoutBtn = page.locator('button[data-test="checkout"]');
+        this.removeButtons = page.locator('button[data-test="remove-sauce-labs-backpack"]');
+
         this.listLabelsProducts = this.page.locator('div[data-test="inventory-item-name"]');
     }
 
@@ -9,6 +15,6 @@ export class CartPage {
     }
 
     async getListProductsInCart() {
-        await this.listLabelsProducts.allTextContents();
+        return await this.listLabelsProducts.allTextContents();
     }
 }
