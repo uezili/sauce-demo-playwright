@@ -1,0 +1,10 @@
+{
+  "products": {
+    "BACKPACK": "backpack",
+    "BIKE_LIGHT": "bikeLight",
+    "BOLT_TSHIRT": "boltTShirt",
+    "FLEECE_JACKET": "fleeceJacket",
+    "ONESIE": "onesie",
+    "TSHIRT_RED": "tshirtRed"
+  }
+}
