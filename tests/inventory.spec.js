@@ -6,7 +6,9 @@ import {InventoryPage} from "../pages/inventoryPage";
 import {CartPage} from "../pages/cartPage";
 
 test.describe('Inventory', () => {
+    let inventoryPage
     test.beforeEach( async ({ page }) => {
+        inventoryPage = new InventoryPage(page);
         const loginPage = new LoginPage(page);
         await loginPage.gotoLoginPage();
 
@@ -31,8 +33,6 @@ test.describe('Inventory', () => {
     });
 
     test('Should add multiple products to the cart and validate them', async ({page}) => {
-        const inventoryPage = new InventoryPage(page);
-
         await inventoryPage.addProductToCart([
             productFixtures.products.BACKPACK,
             productFixtures.products.ONESIE,
@@ -49,8 +49,6 @@ test.describe('Inventory', () => {
     })
 
     test('Should remove products from the cart and validate cart is empty', async ({page}) => {
-        const inventoryPage = new InventoryPage(page);
-
         await inventoryPage.addProductToCart([
             productFixtures.products.FLEECE_JACKET
         ]);
@@ -67,7 +65,6 @@ test.describe('Inventory', () => {
 
     test('Should sort products from A to Z', async ({ page }) => {
 
-        const inventoryPage = new InventoryPage(page);
         await inventoryPage.selectSortOption('az');
 
         const productNames = await inventoryPage.getProductsListItemsName();
@@ -77,7 +74,6 @@ test.describe('Inventory', () => {
 
     test('Should sort products from Z to A', async ({ page }) => {
 
-        const inventoryPage = new InventoryPage(page);
         await inventoryPage.selectSortOption('za');
 
         const productNames = await inventoryPage.getProductsListItemsName();
@@ -86,7 +82,6 @@ test.describe('Inventory', () => {
     });
 
     test('Should sort products from low to high', async ({ page }) => {
-        const inventoryPage = new InventoryPage(page);
         await inventoryPage.selectSortOption('lohi');
 
         const productPrices = await inventoryPage.getProductsListItemsPrice();
@@ -96,7 +91,6 @@ test.describe('Inventory', () => {
 
 
     test('Should sort products from high to low', async ({ page }) => {
-        const inventoryPage = new InventoryPage(page);
         await inventoryPage.selectSortOption('hilo');
 
         const productPrices = await inventoryPage.getProductsListItemsPrice();

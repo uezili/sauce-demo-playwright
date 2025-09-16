@@ -3,6 +3,10 @@ import {test, expect} from '@playwright/test';
 import usersFixtures from '../fixtures/login.json';
 
 test.describe('Login', () => {
+    let loginPage
+    test.beforeEach( async ({ page }) => {
+        loginPage = new LoginPage(page);
+    });
 
     test.afterEach(async ({ page }, testInfo) => {
         console.log(`Finalized "${testInfo.title}" test with status: ${testInfo.status}`);
@@ -12,7 +16,6 @@ test.describe('Login', () => {
     });
 
     test('Should login successfully with valid credentials', async ({page}) => {
-        const loginPage = new LoginPage(page);
 
         await loginPage.gotoLoginPage();
         await loginPage.login(usersFixtures.users.STANDARD_USER, usersFixtures.PASSWORD);
@@ -22,7 +25,6 @@ test.describe('Login', () => {
     });
 
     test('Should not login with invalid credentials and display error message', async ({page}) => {
-        const loginPage = new LoginPage(page);
 
         await loginPage.gotoLoginPage();
         await loginPage.login("invalidUser", 'invalidPassword');
