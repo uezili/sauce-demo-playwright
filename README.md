@@ -12,7 +12,7 @@ sauce-demo-playwright/
 ├── fixtures/                 # Dados de teste (login, produtos, etc.)
 ├── pages/                    # Page Objects (LoginPage, InventoryPage, CartPage, CheckoutPage)
 ├── tests/                    # Arquivos de testes automatizados
-├── utils/ or ultils/         # Helpers / Factories de dados de formulário, funções auxiliares
+├── utils/                    # Helpers / Factories de dados de formulário, funções auxiliares
 ├── package.json
 ├── playwright.config.js      # Configurações do Playwright
 └── README.md
