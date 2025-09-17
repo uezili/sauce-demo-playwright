@@ -26,7 +26,7 @@ test.describe('Cart', () => {
         }
     });
 
-    test('Should display empty cart message correctly', async ({ page }) => {
+    test('Should display empty cart message correctly', async () => {
         await cartPage.gotoCartPage();
         expect(await cartPage.getCartItemsCount()).toBe(0);
     });
@@ -47,7 +47,7 @@ test.describe('Cart', () => {
         await expect(page).toHaveURL("/checkout-step-one.html");
     });
 
-    test('Should keep products in cart after navigation', async ({ page }) => {
+    test('Should keep products in cart after navigation', async () => {
         await inventoryPage.addProductToCart([
             productFixtures.products.BOLT_TSHIRT,
             productFixtures.products.BIKE_LIGHT,
@@ -64,7 +64,7 @@ test.describe('Cart', () => {
     });
 
 
-    test('Should remove product from the cart', async ({ page }) => {
+    test('Should remove product from the cart', async () => {
         await inventoryPage.addProductToCart([
             productFixtures.products.BACKPACK,
         ]);

@@ -15,7 +15,7 @@ test.describe('Login', () => {
         }
     });
 
-    test('Should login successfully with valid credentials', async ({page}) => {
+    test('Should login successfully with valid credentials', async () => {
 
         await loginPage.gotoLoginPage();
         await loginPage.login(usersFixtures.users.STANDARD_USER, usersFixtures.PASSWORD);
@@ -24,7 +24,7 @@ test.describe('Login', () => {
         await expect(loginPage.swagLabsLogo).toBeVisible();
     });
 
-    test('Should not login with invalid credentials and display error message', async ({page}) => {
+    test('Should not login with invalid credentials and display error message', async () => {
 
         await loginPage.gotoLoginPage();
         await loginPage.login("invalidUser", 'invalidPassword');

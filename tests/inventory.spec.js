@@ -6,13 +6,16 @@ import {InventoryPage} from "../pages/inventoryPage";
 import {CartPage} from "../pages/cartPage";
 
 test.describe('Inventory', () => {
+    let loginPage
     let inventoryPage
+    let cartPage
     test.beforeEach( async ({ page }) => {
-        inventoryPage = new InventoryPage(page);
-        const loginPage = new LoginPage(page);
+        loginPage = new LoginPage(page);
         await loginPage.gotoLoginPage();
-
         await loginPage.login(userFixtures.users.STANDARD_USER, userFixtures.PASSWORD);
+
+        inventoryPage = new InventoryPage(page);
+        cartPage = new CartPage(page);
     })
 
     test.afterEach(async ({ page }, testInfo) => {
@@ -22,17 +25,16 @@ test.describe('Inventory', () => {
         }
     });
 
-    test('Should display product list correctly', async ({ page }) => {
-        const inventory = new InventoryPage(page);
+    test('Should display product list correctly', async () => {
 
-        const productsCount = await inventory.productsList.count();
+        const productsCount = await inventoryPage.productsList.count();
         expect(productsCount).toBeGreaterThan(0);
 
-        const productNames = await inventory.getProductsListItemsName();
+        const productNames = await inventoryPage.getProductsListItemsName();
         expect(productNames).toContain('Sauce Labs Backpack');
     });
 
-    test('Should add multiple products to the cart and validate them', async ({page}) => {
+    test('Should add multiple products to the cart and validate them', async () => {
         await inventoryPage.addProductToCart([
             productFixtures.products.BACKPACK,
             productFixtures.products.ONESIE,
@@ -43,12 +45,11 @@ test.describe('Inventory', () => {
             await inventoryPage.validateCartBadge('3');
         })
 
-        const cartPage = new CartPage(page)
         await cartPage.gotoCartPage();
         await expect(cartPage.listLabelsProducts).toHaveCount(3);
     })
 
-    test('Should remove products from the cart and validate cart is empty', async ({page}) => {
+    test('Should remove products from the cart and validate cart is empty', async () => {
         await inventoryPage.addProductToCart([
             productFixtures.products.FLEECE_JACKET
         ]);
@@ -59,11 +60,10 @@ test.describe('Inventory', () => {
 
         await inventoryPage.openCart();
 
-        const cartPage = new CartPage(page)
         await expect(cartPage.listLabelsProducts).toHaveCount(0);
     })
 
-    test('Should sort products from A to Z', async ({ page }) => {
+    test('Should sort products from A to Z', async () => {
 
         await inventoryPage.selectSortOption('az');
 
@@ -72,7 +72,7 @@ test.describe('Inventory', () => {
         expect(productNames).toEqual(sorted);
     });
 
-    test('Should sort products from Z to A', async ({ page }) => {
+    test('Should sort products from Z to A', async () => {
 
         await inventoryPage.selectSortOption('za');
 
@@ -81,7 +81,7 @@ test.describe('Inventory', () => {
         expect(productNames).toEqual(sorted);
     });
 
-    test('Should sort products from low to high', async ({ page }) => {
+    test('Should sort products from low to high', async () => {
         await inventoryPage.selectSortOption('lohi');
 
         const productPrices = await inventoryPage.getProductsListItemsPrice();
@@ -90,7 +90,7 @@ test.describe('Inventory', () => {
     })
 
 
-    test('Should sort products from high to low', async ({ page }) => {
+    test('Should sort products from high to low', async () => {
         await inventoryPage.selectSortOption('hilo');
 
         const productPrices = await inventoryPage.getProductsListItemsPrice();
