@@ -5,7 +5,7 @@ import {InventoryPage} from "../pages/inventoryPage";
 import {CartPage} from "../pages/cartPage";
 import {CheckoutPage} from "../pages/checkoutPage"
 import productFixtures from "../fixtures/products.json";
-import {CheckoutFormFactory} from "../ultils/helpers";
+import {CheckoutFormFactory} from "../utils/helpers";
 
 
 test.describe('Checkout', () => {
