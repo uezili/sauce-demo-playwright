@@ -10,6 +10,7 @@ export class LoginPage {
 
     async gotoLoginPage() {
         await this.page.goto('/');
+        await this.page.waitForSelector('input[data-test="username"]');
     }
 
     async login(username, password) {
