@@ -37,13 +37,6 @@ export class CheckoutPage {
         await this.cancelButton.click();
     }
 
-    // async goToCheckoutWithProduct(product, inventoryPage, cartPage) {
-    //     await inventoryPage.addProductToCart([product]);
-    //     await cartPage.gotoCartPage();
-    //     await cartPage.clickCheckout();
-    // }
-
-
     async getProductItemsTax() {
         const taxs = await this.tax.first().textContent();
         return parseFloat(taxs.replace('Tax: $', '').trim());
