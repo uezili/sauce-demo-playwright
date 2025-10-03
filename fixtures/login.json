@@ -6,7 +6,7 @@
     "INVALID_USER": "invalidUser"
   },
   "PASSWORD": "secret_sauce",
-   "INVALID_PASSWORD": "invalidPassword",
+  "INVALID_PASSWORD": "invalidPassword",
    "ERROR_MESSAGES": {
      "INVALID_CREDENTIALS": "Epic sadface: Username and password do not match any user in this service"
    }
