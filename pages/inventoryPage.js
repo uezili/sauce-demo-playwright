@@ -71,7 +71,13 @@ export class InventoryPage {
 	}
 
 	async getCartBadge() {
-		return this.cartBadge;
+		// Wait for the badge to be visible, or return null if not present
+		const isVisible = await this.cartBadge.isVisible();
+		if (!isVisible) {
+			return null;
+		}
+		const text = await this.cartBadge.textContent();
+		return text;
 	}
 
 	async getProductsListItemsName() {
