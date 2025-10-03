@@ -59,7 +59,7 @@ export class InventoryPage {
 
 	async removeProductFromCart(products = []) {
 		if (products.length === 0) {
-			throw new Error('Need to pass at least one product to add to cart!');
+			throw new Error('Need to pass at least one product to remove from cart!');
 		}
 		for (const product of products) {
 			if (this.removeButtons[product]) {
