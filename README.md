@@ -1,5 +1,7 @@
 # Sauce Demo Playwright Automation
 
+![CI](https://github.com/uezili/sauce-demo-playwright/actions/workflows/playwright.yml/badge.svg)
+
 Conjunto de testes automatizados para o site **Sauce Labs Demo** usando [Playwright](https://playwright.dev/) + JavaScript.  
 Este projeto abrange testes de interface do usuário de ponta a ponta, incluindo fluxos de login, inventário, carrinho e checkout.
 
@@ -42,6 +44,32 @@ sauce-demo-playwright/
 ```bash
   npx playwright test --ui
 ```
+
+### 6. Executar smoke/regression por tags
+```bash
+# smoke
+npm run test:smoke
+
+# regression
+npm run test:regression
+```
+
+### 7. Executar testes de acessibilidade (axe)
+```bash
+npx playwright test tests/accessibility.spec.js
+```
+
+### 8. Lint e format
+```bash
+# checar lint
+npm run lint
+
+# corrigir automaticamente
+npm run lint:fix
+
+# formatar com Prettier
+npm run format
+```
 ## Principais cenários de teste cobertos
 
 - Login válido e inválido
@@ -57,6 +85,8 @@ sauce-demo-playwright/
 - Page Object Model (POM) para separar responsabilidades de página/lógica de teste.
 - Fixtures e Factories para gerenciar dados de teste.
 - Hooks (beforeEach / afterEach) para setup/teardown e captura de screenshot em falhas.
+- CI (GitHub Actions) executando testes em PRs e publicando relatórios como artefatos.
+- Checks de acessibilidade (axe) para páginas-chave.
 
 ## Tecnologias
 
@@ -64,3 +94,19 @@ sauce-demo-playwright/
 - Playwright
 - JavaScript
 - Fixtures / Factories para dados de teste
+
+## Relatórios
+
+- HTML report padrão do Playwright: gerado em `playwright-report`.
+  - Abrir localmente: `npm run report` ou `npx playwright show-report`.
+- Allure report: resultados em `allure-results` (gerado via `allure-playwright`).
+  - Servir localmente: `npm run report:allure`.
+
+## Integração Contínua (CI)
+
+Um workflow do GitHub Actions (`.github/workflows/playwright.yml`) instala dependências, baixa browsers do Playwright, executa os testes e publica os artefatos:
+
+- `playwright-report`: relatório HTML do Playwright.
+- `allure-results`: resultados para consumo do Allure.
+
+Os testes também podem usar a variável `BASE_URL` (por padrão `https://www.saucedemo.com/`).
