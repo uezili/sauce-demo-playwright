@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:playwright/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "playwright"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "overrides": [
+    {
+      "files": ["tests/**/*.js"],
+      "env": { "browser": true, "es2021": true },
+      "rules": {}
+    },
+    {
+      "files": ["pages/**/*.js"],
+      "env": { "browser": true }
+    }
+  ],
+  "rules": {
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": ["warn", { "allow": ["warn", "error", "log"] }]
+  }
+}
+
+
