@@ -21,9 +21,6 @@ test.describe('Cart', () => {
 
     test.afterEach(async ({ page }, testInfo) => {
         console.log(`Finalized "${testInfo.title}" test with status: ${testInfo.status}`);
-        if (testInfo.status === 'failed') {
-            await page.screenshot({ path: `screenshots/failed-${testInfo.title}.png` });
-        }
     });
 
     test('Should display empty cart message correctly', async () => {
