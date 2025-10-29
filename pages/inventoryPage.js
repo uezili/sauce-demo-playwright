@@ -80,6 +80,13 @@ export class InventoryPage {
 		return text;
 	}
 
+	async validateCartBadge(expectedCount) {
+		const current = await this.getCartBadge();
+		if (current !== expectedCount) {
+			throw new Error(`Cart badge mismatch: expected "${expectedCount}" but got "${current}"`);
+		}
+	}
+
 	async getProductsListItemsName() {
 		return await this.productsListItemsName.allTextContents();
 	}
